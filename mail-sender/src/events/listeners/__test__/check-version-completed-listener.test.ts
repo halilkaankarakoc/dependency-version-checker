@@ -30,16 +30,11 @@ const setup = async () => {
 const mailer = MailerFactory.getMailer(mailerConfig.mailerName);
 mailer.send = jest.fn().mockImplementation(async () => { });
 
+
 it('sends mail', async () => {
     const { listener, data, msg } = await setup();
     await listener.onMessage(data, msg);
     expect(mailer.send).toHaveBeenCalled();
-});
-
-it('published event to expiration service if dependencies outdated', async () => {
-    const { listener, data, msg } = await setup();
-    await listener.onMessage(data, msg);
-    expect(natsWrapper.client.publish).toHaveBeenCalled();
 });
 
 it('acks message', async () => {
