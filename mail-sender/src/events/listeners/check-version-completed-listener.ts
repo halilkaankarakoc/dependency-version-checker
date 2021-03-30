@@ -5,6 +5,15 @@ import { MailerFactory } from '../../factories/mailer-factory/mailer-factory';
 import { TemplateFactory } from '../../factories/template-factory/template-factory';
 import { EmailMessage } from '../../email-message';
 import { mailerConfig } from '../../../config/mailer-config';
+import { DependenciesOutdatedPublisher } from '../publishers/dependencies-outdated-publisher';
+import { natsWrapper } from '../../nats-wrapper';
+
+const EXPIRATION_PERIOD = process.env.EXPIRATION_PERIOD ?
+    Number.parseInt(process.env.EXPIRATION_PERIOD)
+    :
+    24 * 60 * 60; // 24 hour
+const EXPIRATION_PERIOD_ON_ERROR = 60 * 60; // 1 hour
+
 
 export class CheckVersionCompletedListener extends Listener<CheckVersionCompletedEvent> {
     queueGroupName = queueGroupName;
@@ -26,16 +35,16 @@ export class CheckVersionCompletedListener extends Listener<CheckVersionComplete
             if (isOutdatedDependencyExists) {
                 const newRepoMetadata = { ...data.repoMetadata };
                 const expiration = new Date();
-                expiration.setSeconds(expiration.getSeconds() + 24 * 60);
+                expiration.setSeconds(expiration.getSeconds() + EXPIRATION_PERIOD);
                 newRepoMetadata.expiresAt = expiration;
-                // new DependenciesOutdatedPublisher(natsWrapper.client).publish(data.repoMetadata);
+                new DependenciesOutdatedPublisher(natsWrapper.client).publish(newRepoMetadata);
             }
         } catch (error) {
             const newRepoMetadata = { ...data.repoMetadata };
             const expiration = new Date();
-            expiration.setSeconds(expiration.getSeconds() + 10 * 60);
+            expiration.setSeconds(expiration.getSeconds() + EXPIRATION_PERIOD_ON_ERROR);
             newRepoMetadata.expiresAt = expiration;
-            // new DependenciesOutdatedPublisher(natsWrapper.client).publish(data.repoMetadata);
+            new DependenciesOutdatedPublisher(natsWrapper.client).publish(newRepoMetadata);
             console.log(error);
         }
         msg.ack();

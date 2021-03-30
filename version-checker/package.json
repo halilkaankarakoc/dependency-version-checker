@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dependency-version-checker/common": "^1.0.22",
+    "@dependency-version-checker/common": "^1.0.24",
     "axios": "^0.21.1",
     "lodash": "^4.17.21",
     "node-nats-streaming": "^0.3.2"

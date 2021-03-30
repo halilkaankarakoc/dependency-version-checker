@@ -41,7 +41,7 @@ export default abstract class RepoClient {
         } catch (error) {
             const { repoName, provider } = this.repoMetadata;
             if (error.response && error.response.status === 403) {
-                throw new RateLimitError('Dependency Version Checker uses public api so it has a request limit... Please try again later. Maybe 30 minutes later :)');
+                throw new RateLimitError();
             }
             if (error.response && error.response.status === 404) {
                 throw new RepositoryNotFoundError(`Repository: ${repoName} not found at ${provider}`);

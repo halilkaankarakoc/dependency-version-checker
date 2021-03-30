@@ -25,7 +25,7 @@ export default abstract class FileFetcherBase {
             return data;
         } catch (error) {
             if (error.response && error.response.status === 403) {
-                throw new RateLimitError('Dependency Version Checker uses public api so it has a request limit... Please try again later. Maybe 30 minutes later :)');
+                throw new RateLimitError();
             }
             throw new RepositoryNotFoundError(`Repository: ${repoName} not found at ${provider}`);
         }
@@ -38,7 +38,7 @@ export default abstract class FileFetcherBase {
             return data;
         } catch (error) {
             if (error.response && error.response.status === 403) {
-                throw new RateLimitError('Dependency Version Checker uses public api so it has a request limit... Please try again later. Maybe 30 minutes later :)');
+                throw new RateLimitError();
             }
             throw new FileNotFoundError(`Filename: ${fileName} not found at ${repoName}`);
         }

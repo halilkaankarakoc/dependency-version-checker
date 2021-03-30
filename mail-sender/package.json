@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dependency-version-checker/common": "^1.0.22",
+    "@dependency-version-checker/common": "^1.0.24",
     "@sendgrid/mail": "^7.4.2",
     "node-nats-streaming": "^0.3.2"
   },

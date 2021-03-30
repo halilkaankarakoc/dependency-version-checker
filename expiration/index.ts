@@ -1,5 +1,6 @@
 import { natsWrapper } from './src/nats-wrapper';
 import { RepoMetadataCreatedListener } from './src/events/listeners/repo-metadata-created-listener';
+import { DependenciesOutdatedListener } from './src/events/listeners/dependencies-outdated-listener';
 
 const start = async () => {
     try {
@@ -25,6 +26,7 @@ const start = async () => {
         process.on('SIGTERM', () => natsWrapper.client.close());
 
         new RepoMetadataCreatedListener(natsWrapper.client).listen();
+        new DependenciesOutdatedListener(natsWrapper.client).listen();
     } catch (err) {
         console.error(err);
     }

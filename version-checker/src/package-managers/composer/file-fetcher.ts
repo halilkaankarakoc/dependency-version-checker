@@ -29,7 +29,7 @@ export default class FileFetcher extends FileFetcherBase {
         });
 
         if (rateLimitErrors.length) {
-            throw new RateLimitError('Dependency Version Checker uses public api so it has a request limit...Please try again later.');
+            throw new RateLimitError();
         }
 
         return validFiles;

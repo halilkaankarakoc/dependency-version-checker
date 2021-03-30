@@ -7,7 +7,10 @@ import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
-const EXPIRATION_PERIOD = 15;
+const EXPIRATION_PERIOD = process.env.EXPIRATION_PERIOD ?
+    Number.parseInt(process.env.EXPIRATION_PERIOD)
+    :
+    24 * 60 * 60; // 24 hour
 
 router.post(
     '/api/checkVersion',
