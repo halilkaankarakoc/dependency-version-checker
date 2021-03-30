@@ -13,7 +13,7 @@ clone the repository
 
 Get API key from sendgrid and in docker-compose.yml file set SENDGRID_API_KEY environment variable under mail-sender service.
 
-If you want to test expiration time, set EXPIRATION_PERIOD environment variable under api and mail-sender service. Value is second. 
+If you want to test expiration time, in docker-compose.yml file set EXPIRATION_PERIOD environment variable under api and mail-sender service. Value is second. 
 
 At sendgrid dashboard set single sender.
 
