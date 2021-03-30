@@ -9,8 +9,6 @@ export class DependenciesOutdatedListener extends Listener<DependenciesOutdatedE
 
     async onMessage(data: DependenciesOutdatedEvent['data'], msg: Message) {
         const delay = new Date(data.expiresAt).getTime() - new Date().getTime();
-        console.log('DependenciesOutdatedListener');
-        console.log(data);
         await expirationQueue.add(
             {
                 repo: data,
