@@ -1,0 +1,57 @@
+version: "3"
+services:
+  api:
+    depends_on:
+      - nats-streaming-server
+    build:
+      dockerfile: Dockerfile
+      context: ./api
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - NATS_CLUSTER_ID=nats-streaming
+      - NATS_CLIENT_ID=api
+      - NATS_URL=http://nats-streaming-server:4222
+  nats-streaming-server:
+    command:
+      - "--cluster_id"
+      - "nats-streaming"
+    image: "nats-streaming:latest" 
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+  redis-server:
+    image: "redis:latest"
+  expiration:
+    depends_on:
+      - nats-streaming-server
+      - redis-server
+    build:
+      dockerfile: Dockerfile
+      context: ./expiration
+    environment:
+      - REDIS_HOST=redis-server
+      - NATS_CLUSTER_ID=nats-streaming
+      - NATS_CLIENT_ID=expiration
+      - NATS_URL=http://nats-streaming-server:4222
+  version-checker:
+    depends_on:
+      - nats-streaming-server
+    build:
+      dockerfile: Dockerfile
+      context: ./version-checker
+    environment:
+      - NATS_CLUSTER_ID=nats-streaming
+      - NATS_CLIENT_ID=version-checker
+      - NATS_URL=http://nats-streaming-server:4222
+  mail-sender:
+      depends_on:
+        - nats-streaming-server
+      build:
+        dockerfile: Dockerfile
+        context: ./mail-sender
+      environment:
+        - NATS_CLUSTER_ID=nats-streaming
+        - NATS_CLIENT_ID=mail-sender
+        - NATS_URL=http://nats-streaming-server:4222
