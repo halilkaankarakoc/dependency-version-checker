@@ -56,4 +56,3 @@ services:
         - NATS_CLUSTER_ID=nats-streaming
         - NATS_CLIENT_ID=mail-sender
         - NATS_URL=http://nats-streaming-server:4222
-        - SENDGRID_API_KEY=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
