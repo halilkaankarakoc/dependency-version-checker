@@ -32,7 +32,7 @@ docker-compose up -d
 
 ```
 
-Dependency Version Checker consists of 4 main services: `api`, `expiration`, `version-checker`, `mail-sender` and `common`. They communicate each other with `NATS streaming server`.
+Dependency Version Checker consists of 5 main services: `api`, `expiration`, `version-checker`, `mail-sender` and `common`. They communicate each other with `NATS streaming server`.
 
 # api
 Api gets repository datas and email list from user and sends these information immediately to `expiration` service.
@@ -53,7 +53,7 @@ There are 4 main components in `version-checker`:
   - file-parsers
   - update checkers
 
-All base classes are placed into `shared` folder. It contains base classes for clients, file-fetchers, file-parsers and update-checkers. Type of fetchers, parsers and checkers are categorized by registry type. `package-managers` folder contains registry (npm, composer...) types. All registry types are seperate. They have their own implementations in same structure but in different logic. This approach aim to seperation and independence.
+All base classes are placed into `shared` folder. It contains base classes for clients, file-fetchers, file-parsers, update-checkers and registries. Type of fetchers, parsers and checkers are categorized by registry type. `package-managers` folder contains registry (npm, composer...) types. All registry types are seperate. They have their own implementations in same structure but in different logic. This approach aim to seperation and independence.
 
 # mail-sender
 Mail sender service sends email and if dependencies are not up to date, its sends datas to `expiration` service again.
