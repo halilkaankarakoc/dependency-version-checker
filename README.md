@@ -53,7 +53,7 @@ There are 4 main components in `version-checker`:
   - file-parsers
   - update checkers
 
-All base classes are placed into `shared` folder. It contains base classes for clients, file-fetchers, file-parsers, update-checkers and registries. Type of fetchers, parsers and checkers are categorized by registry type. `package-managers` folder contains registry (npm, composer...) types. All registry types are seperate. They have their own implementations in same structure but in different logic. This approach aim to seperation and independence.
+All base classes are placed into `shared` folder. It contains base classes for clients, file-fetchers, file-parsers, update-checkers and registries. Type of fetchers, parsers and checkers are categorized by registry type. `package-managers` folder contains registry (npm, composer...) types. All registry types are seperate. They have their own implementations in same structure but in different logic. This approach aims to seperation and independence.
 
 # mail-sender
 Mail sender service sends email and if dependencies are not up to date, its sends datas to `expiration` service again.
