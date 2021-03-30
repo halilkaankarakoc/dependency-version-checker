@@ -4,8 +4,6 @@
 
 Fetches your dependency files, extract its dependencies, checks whether dependencies up to date and finally sends outdated dependencies as an email in every 24 hours if dependencies are not updated.
 
-Dependency Version Checker consists of 4 main services: `api`, `expiration`, `version-checker`, `mail-sender` and `common`. They communicate each other with `NATS streaming server`.
-
 # Usage
 
 ```
@@ -33,6 +31,8 @@ docker-compose build
 docker-compose up -d
 
 ```
+
+Dependency Version Checker consists of 4 main services: `api`, `expiration`, `version-checker`, `mail-sender` and `common`. They communicate each other with `NATS streaming server`.
 
 # api
 Api gets repository datas and email list from user and sends these information immediately to `expiration` service.
