@@ -36,11 +36,11 @@ it('sends mail', async () => {
     expect(mailer.send).toHaveBeenCalled();
 });
 
-// it('published event to expiration service if dependencies outdated', async () => {
-//     const { listener, data, msg } = await setup();
-//     await listener.onMessage(data, msg);
-//     expect(natsWrapper.client.publish).toHaveBeenCalled();
-// });
+it('published event to expiration service if dependencies outdated', async () => {
+    const { listener, data, msg } = await setup();
+    await listener.onMessage(data, msg);
+    expect(natsWrapper.client.publish).toHaveBeenCalled();
+});
 
 it('acks message', async () => {
     const { listener, data, msg } = await setup();

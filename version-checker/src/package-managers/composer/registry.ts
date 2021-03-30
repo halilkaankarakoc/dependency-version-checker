@@ -6,7 +6,6 @@ import { Dependencies } from '@dependency-version-checker/common';
 export default class Registry extends RegistryBase {
 
     private baseUrl = 'https://repo.packagist.org';
-    // /symfony/messenger.json
     async getVersion(packageName: string): Promise<Dependencies> {
         const { data } = await axios.get<ComposerRegistryResponse>(`${this.baseUrl}/p2/${packageName}.json`);
         return { [packageName]: data.packages[packageName][0].version };
