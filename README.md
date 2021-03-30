@@ -6,6 +6,32 @@ Fetches your dependency files, extract its dependencies, checks whether dependen
 
 Dependency Version Checker consists of 4 main services: `api`, `expiration`, `version-checker`, `mail-sender` and `common`. They communicate each other with `NATS streaming server`.
 
+# Usage
+
+```
+clone the repository
+
+Get API key from sendgrid and in docker-compose.yml file set as an environment variable.
+
+At sendgrid dashboard set single sender.
+
+`mail-sender/src/events/listeners/check-version-completed-listener.ts`
+const message: EmailMessage = {
+                to: data.repoMetadata.emailList,
+                from: '',
+                subject: 'Dependency Version Checker',
+                text: content,
+                html: content,
+};
+
+Paste the email address you get to 'from' field in message object above.
+
+docker-compose build
+
+docker-compose up -d
+
+```
+
 # api
 Api gets repository datas and email list from user and sends these information immediately to `expiration` service.
 
