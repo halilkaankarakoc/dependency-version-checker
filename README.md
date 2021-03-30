@@ -34,13 +34,13 @@ docker-compose up -d
 
 Dependency Version Checker consists of 5 main services: `api`, `expiration`, `version-checker`, `mail-sender` and `common`. They communicate each other with `NATS streaming server`.
 
-# api
+## api
 Api gets repository datas and email list from user and sends these information immediately to `expiration` service.
 
-# expiration
+## expiration
 Expiration service adds incoming datas to a queue with a predetermined delay(24 hours). When the time is up, it sends data to `version-checker` service.
 
-# version-checker
+## version-checker
 Version checker service gets expired datas and performs the following steps:
   - fetches dependency files from repository provider.
   - parses and extracts dependencies.
@@ -55,10 +55,10 @@ There are 4 main components in `version-checker`:
 
 All base classes are placed into `shared` folder. It contains base classes for clients, file-fetchers, file-parsers, update-checkers and registries. Type of fetchers, parsers and checkers are categorized by registry type. `package-managers` folder contains registry (npm, composer...) types. All registry types are seperate. They have their own implementations in same structure but in different logic. This approach aims to seperation and independence.
 
-# mail-sender
+## mail-sender
 Mail sender service sends email and if dependencies are not up to date, its sends datas to `expiration` service again.
 
-# common
+## common
 Common includes shared code for reusability.
 
 # Event Flow
