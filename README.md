@@ -70,7 +70,7 @@ Common includes shared code for reusability.
     "emailList": ["kaankarakoc09@gmail.com"]
   } 
  ```
- - User makes a request to `/api/checkVersion` endpoint with the required datas.
+ - User makes a request to `localhost:5000/api/checkVersion` endpoint with the required datas.
  - If data can pass the request validation middleware in api, it is sent to `expiration` service.
  - After 24 hours passed, this data is sent to `version-checker` service.
  - In `version-checker` service:
