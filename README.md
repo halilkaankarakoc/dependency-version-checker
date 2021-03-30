@@ -42,7 +42,7 @@ Expiration service adds incoming datas to a queue with a predetermined delay(24 
 
 # version-checker
 Version checker service gets expired datas and performs the following steps:
-  - fetch dependency files from repository provider.
+  - fetches dependency files from repository provider.
   - parses and extracts dependencies.
   - checks versions from related registry.
 After these steps, it sends datas to `mail-sender` service.
