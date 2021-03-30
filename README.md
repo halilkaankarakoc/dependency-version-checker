@@ -11,7 +11,7 @@ Dependency Version Checker consists of 4 main services: `api`, `expiration`, `ve
 ```
 clone the repository
 
-Get API key from sendgrid and in docker-compose.yml file set as an environment variable.
+Get API key from sendgrid and in docker-compose.yml file set as an environment variable under mail-sender service.
 
 At sendgrid dashboard set single sender.
 
