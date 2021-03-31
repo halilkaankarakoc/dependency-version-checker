@@ -11,8 +11,6 @@ clone the repository
 
 Get API key from sendgrid and in docker-compose.yml file set SENDGRID_API_KEY environment variable under mail-sender service.
 
-If you want to test expiration time, in docker-compose.yml file set EXPIRATION_PERIOD environment variable under api and mail-sender service. Value is second. 
-
 At sendgrid dashboard set single sender.
 
 `mail-sender/src/events/listeners/check-version-completed-listener.ts`
@@ -25,6 +23,8 @@ const message: EmailMessage = {
 };
 
 Paste the email address you get to 'from' field in message object above.
+
+If you want to test expiration time, in docker-compose.yml file set EXPIRATION_PERIOD environment variable under api and mail-sender service. Value is second. 
 
 docker-compose build
 
@@ -75,7 +75,7 @@ Common includes shared code for reusability.
  - After 24 hours passed, this data is sent to `version-checker` service.
  - In `version-checker` service:
     - Firstly fetcher and client are created (`NpmFileFetcher` and `GithubClient`) and fetched dependency files `package.json`.
-    - File parser is created. Dependency files are parsed and its dependencies are extracted.
-    - Update checker is created. Versions checked from `npm` registry.
+    - File parser (`NpmFileParser`) is created. Dependency files are parsed and its dependencies are extracted.
+    - Update checker (`NpmUpdateChecker`) is created. Versions checked from `npm` registry.
   - A data which consists dependencies and email list are sent to `mail-sender` service.
   - In `mail-sender` service, datas are sent as an email. If these dependencies are not up to date, it is sent again `expiration` service.
