@@ -2,7 +2,16 @@
 
 # Overview
 
-Fetches your dependency files, extract its dependencies, checks whether dependencies up to date and finally sends outdated dependencies as an email in every 24 hours if dependencies are not updated.
+Fetches dependency files in repository, extract its dependencies, checks whether dependencies up to date and finally sends outdated dependencies as an email in every 24 hours if dependencies are not updated. Currently supports npm and composer packages in github.
+
+# Requirements
+
+- User makes a request with repository name and email address(es).
+- Application looks for whether package.json or composer.json exist in `/` directory.
+- If it founds, parse dependency file and extracts its dependencies.
+- It compares version by the help of related registry.
+- Finally if dependencies are outdated, for every 24 hours it sends outdated dependencies as an email until user updates dependencies. If dependencies are up to date mail is sent for once after 24 hours.
+
 
 # Usage
 
